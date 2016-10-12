@@ -28,11 +28,11 @@
     "build:umd:min": "cross-env BABEL_ENV=commonjs NODE_ENV=production webpack src/index.js dist/redux-action-man.min.js",
     "build:examples": "babel-node examples/buildAll.js",
     "build": "npm run build:commonjs && npm run build:es && npm run build:umd && npm run build:umd:min",
-    "prepublish": "npm run clean && npm run check:src && npm run build && check-es3-syntax lib/ dist/ --kill --print"
+    "prepublish": "npm run clean && npm run check:src && npm run build"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/anubhavgupta/redux-action-man.git"
   },
   "keywords": [
     "react",
@@ -50,7 +50,7 @@
     "Anubhav Gupta <anubhav200@gmail.com> (http://github.com/anubhavgupta)"
   ],
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://github.com/anubhavgupta/redux-action-man",
   "dependencies": {
     "redux-actions": "^0.12.0"
   },
