@@ -1,11 +1,12 @@
-import {getActionManFor} from '../src/index';
-import {rootActionGroup} from '../src/vars';
+import { getActionManFor } from '../src/index';
+import { rootActionGroup } from '../src/vars';
+
 describe('Action Path Creation:', () => {
   it('should be a valid function', () => {
     expect(typeof getActionManFor).toBe('function');
   });
 
-  it("should return an object when executed with a valid path",()=>{
+  it('should return an object when executed with a valid path',()=>{
     const objs = [
       getActionManFor('app'),
       getActionManFor('app/test'),
@@ -13,7 +14,7 @@ describe('Action Path Creation:', () => {
       getActionManFor('com/test'),
       getActionManFor(' app/test1 ')
     ];
-    for(let obj of objs){
+    for(let obj of objs) {
       expect(typeof obj).toBe('object');
 
       // object structure
@@ -27,7 +28,7 @@ describe('Action Path Creation:', () => {
     }
   });
 
-  it("should throw when invalid path is passed",()=>{
+  it('should throw when invalid path is passed',()=>{
 
     const paths = [
       '/',
@@ -40,7 +41,7 @@ describe('Action Path Creation:', () => {
       ''
     ];
 
-    for(let path of paths){
+    for(let path of paths) {
       expect(()=>{
         getActionManFor(path);
       }).toThrow();
@@ -48,19 +49,19 @@ describe('Action Path Creation:', () => {
 
   });
 
-  it("should create correct parent child structure on defining different paths",()=>{
+  it('should create correct parent child structure on defining different paths',()=>{
     getActionManFor('app');
     expect(rootActionGroup.children.app).toBeDefined();
   });
 
-  it("should create correct parent child structure on defining different paths[nested]",()=>{
+  it('should create correct parent child structure on defining different paths[nested]',()=>{
     getActionManFor('com/path/check');
     expect(rootActionGroup.children.com).toBeDefined();
     expect(rootActionGroup.children.com.children.path).toBeDefined();
     expect(rootActionGroup.children.com.children.path.children.check).toBeDefined();
   });
 
-  it("should create correct parent child structure on defining different paths[nested siblings]",()=>{
+  it('should create correct parent child structure on defining different paths[nested siblings]',()=>{
     getActionManFor('com/path/check');
     getActionManFor('com/path1/check1');
     expect(rootActionGroup.children.com).toBeDefined();

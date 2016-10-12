@@ -1,5 +1,5 @@
-import {separator} from './vars';
-import {ActionGroup} from './ActionGroup';
+import { separator } from './vars';
+import { ActionGroup } from './ActionGroup';
 
 export function getOrCreateActionsGroup(nameArr, currentGroup, index, preventCreationMode) {
 

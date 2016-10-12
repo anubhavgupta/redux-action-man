@@ -1,8 +1,8 @@
-import {rootActionGroup, separator, actionSeparator, otherwise} from './vars';
-import {getOrCreateActionsGroup} from './createActionGroup';
-import {createAction} from 'redux-actions';
+import { rootActionGroup, separator, actionSeparator, otherwise } from './vars';
+import { getOrCreateActionsGroup } from './createActionGroup';
+import { createAction } from 'redux-actions';
 
-function checkIfPathIsValid(path){
+function checkIfPathIsValid(path) {
   const actionPath = path.trim();
   return (
     actionPath &&
@@ -34,7 +34,7 @@ export function getActionManFor(actionsPath) {
         const action = createAction(fullActionName, ...restArgs);
         action.ofKind = function (kind) {
           if (!(typeof kind === 'object' && kind !== null)) {
-            throw new Error("kind is not defined")
+            throw new Error('kind is not defined')
           }
           //
           const subActionNames = {};
@@ -112,6 +112,4 @@ export function getActionManFor(actionsPath) {
     throw new Error('Action Path is invalid');
   }
 }
-
-
 

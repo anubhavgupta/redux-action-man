@@ -1,4 +1,4 @@
-import {getActionManFor} from './getActionManFor';
+import { getActionManFor } from './getActionManFor';
 
 export {
   getActionManFor
