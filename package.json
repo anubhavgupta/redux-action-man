@@ -1,6 +1,6 @@
 {
   "name": "redux-action-man",
-  "version": "1.0.0",
+  "version": "0.5.0",
   "description": "Action Man: An easy to use and namespaced action creator.",
   "main": "lib/index.js",
   "module": "es/index.js",
