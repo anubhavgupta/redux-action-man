@@ -1,5 +1,4 @@
-import { getActionManFor } from '../src/index';
-import { rootActionGroup } from '../src/vars';
+import { getActionManFor, ROOT_ACTION_GROUP } from '../src/index';
 
 describe('Action Path Creation:', () => {
   it('should be a valid function', () => {
@@ -51,23 +50,23 @@ describe('Action Path Creation:', () => {
 
   it('should create correct parent child structure on defining different paths',()=>{
     getActionManFor('app');
-    expect(rootActionGroup.children.app).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.app).toBeDefined();
   });
 
   it('should create correct parent child structure on defining different paths[nested]',()=>{
     getActionManFor('com/path/check');
-    expect(rootActionGroup.children.com).toBeDefined();
-    expect(rootActionGroup.children.com.children.path).toBeDefined();
-    expect(rootActionGroup.children.com.children.path.children.check).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com.children.path).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com.children.path.children.check).toBeDefined();
   });
 
   it('should create correct parent child structure on defining different paths[nested siblings]',()=>{
     getActionManFor('com/path/check');
     getActionManFor('com/path1/check1');
-    expect(rootActionGroup.children.com).toBeDefined();
-    expect(rootActionGroup.children.com.children.path).toBeDefined();
-    expect(rootActionGroup.children.com.children.path1).toBeDefined();
-    expect(rootActionGroup.children.com.children.path.children.check).toBeDefined();
-    expect(rootActionGroup.children.com.children.path1.children.check1).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com.children.path).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com.children.path1).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com.children.path.children.check).toBeDefined();
+    expect(ROOT_ACTION_GROUP.children.com.children.path1.children.check1).toBeDefined();
   });
 });
