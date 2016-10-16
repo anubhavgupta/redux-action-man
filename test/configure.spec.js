@@ -2,9 +2,9 @@ import { getActionManFor, configure, ROOT_ACTION_GROUP } from '../src/index';
 
 describe('Configuration test Suit:', () => {
 
-  describe("when both SEPARATOR and ACTION_SEPARATOR are set to same value",function(){
+  describe('when both SEPARATOR and ACTION_SEPARATOR are set to same value', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       // set default values
       configure({
         SEPARATOR: '/',
@@ -13,7 +13,7 @@ describe('Configuration test Suit:', () => {
       });
     });
 
-    afterEach(function() {
+    afterEach(function () {
       // set default values
       configure({
         SEPARATOR: '/',
@@ -22,7 +22,7 @@ describe('Configuration test Suit:', () => {
       });
     });
 
-    it("should throw and error when `SEPARATOR` and `ACTION_SEPARATOR` are same",()=>{
+    it('should throw and error when `SEPARATOR` and `ACTION_SEPARATOR` are same',()=>{
       expect(()=>{
         configure({
           SEPARATOR: ':'
@@ -30,7 +30,7 @@ describe('Configuration test Suit:', () => {
       }).toThrow();
     });
 
-    it("should throw and error when `SEPARATOR` and `ACTION_SEPARATOR` are same",()=>{
+    it('should throw and error when `SEPARATOR` and `ACTION_SEPARATOR` are same',()=>{
       expect(()=>{
         configure({
           ACTION_SEPARATOR: '/'
@@ -38,7 +38,7 @@ describe('Configuration test Suit:', () => {
       }).toThrow();
     });
 
-    it("should throw and error when `SEPARATOR` and `ACTION_SEPARATOR` are same",()=>{
+    it('should throw and error when `SEPARATOR` and `ACTION_SEPARATOR` are same',()=>{
       expect(()=>{
         configure({
           SEPARATOR: '_',
@@ -50,12 +50,12 @@ describe('Configuration test Suit:', () => {
   });
 
 
-  describe("when separator is changed",function(){
+  describe('when separator is changed',function () {
     it('should be possible to change separator [_]', () => {
       configure({
         SEPARATOR:'_'
       });
-      getActionManFor("app_test_test1");
+      getActionManFor('app_test_test1');
       expect(ROOT_ACTION_GROUP.children.app).toBeDefined();
       expect(ROOT_ACTION_GROUP.children.app.children.test).toBeDefined();
       expect(ROOT_ACTION_GROUP.children.app.children.test.children.test1).toBeDefined();
@@ -68,7 +68,7 @@ describe('Configuration test Suit:', () => {
       configure({
         SEPARATOR:'\\'
       });
-      getActionManFor("com\\gamer\\test");
+      getActionManFor('com\\gamer\\test');
       expect(ROOT_ACTION_GROUP.children.com).toBeDefined();
       expect(ROOT_ACTION_GROUP.children.com.children.gamer).toBeDefined();
       expect(ROOT_ACTION_GROUP.children.com.children.gamer.children.test).toBeDefined();
@@ -81,7 +81,7 @@ describe('Configuration test Suit:', () => {
       configure({
         SEPARATOR:'.'
       });
-      getActionManFor("src.test.test1");
+      getActionManFor('src.test.test1');
       expect(ROOT_ACTION_GROUP.children.src).toBeDefined();
       expect(ROOT_ACTION_GROUP.children.src.children.test).toBeDefined();
       expect(ROOT_ACTION_GROUP.children.src.children.test.children.test1).toBeDefined();
@@ -90,9 +90,7 @@ describe('Configuration test Suit:', () => {
     });
   });
 
-
-
-  describe("when action separator is changed",function(){
+  describe('when action separator is changed',function () {
 
   });
 
@@ -101,9 +99,9 @@ describe('Configuration test Suit:', () => {
 
   });
 
-  describe("otherwise symbol config change:",function(){
+  describe('otherwise symbol config change:',function () {
 
-    describe("when `otherwise` handler is present in the reducer ",function(){
+    describe('when `otherwise` handler is present in the reducer ',function () {
       let reducer;
       const {
         defineAction,
@@ -112,7 +110,7 @@ describe('Configuration test Suit:', () => {
         actionNames
       } = getActionManFor('app/test');
 
-      beforeEach(function(){
+      beforeEach(function () {
         configure({
           OTHERWISE:'&&'
         });
@@ -120,10 +118,10 @@ describe('Configuration test Suit:', () => {
         defineAction('TEST_ACTION');
 
         reducer = actionHandler({
-          [actionNames.TEST_ACTION]: function(state, action){
+          [actionNames.TEST_ACTION]: function (state, action) {
             return 'TEST_ACTION_TRIGGERED_' + action.payload;
           },
-          '&&': function(state, action){
+          '&&': function (state, action) {
             return 'UNKNOWN_ACTION_' + action.payload
           }
         });
@@ -133,7 +131,7 @@ describe('Configuration test Suit:', () => {
         expect(reducer(null, actions.TEST_ACTION(10))).toBe('TEST_ACTION_TRIGGERED_10');
       });
 
-      it("should handle an action when a generic action handler is defined and direct handler of the triggered action is not present",()=>{
+      it('should handle an action when a generic action handler is defined and direct handler of the triggered action is not present',()=>{
         expect(reducer(null, {
           type:'TEST_&&_ACTION',
           payload: 10
@@ -141,7 +139,7 @@ describe('Configuration test Suit:', () => {
       });
     });
 
-    describe("when `otherwise` handler is not present",function(){
+    describe('when `otherwise` handler is not present',function () {
       let reducer;
       const {
         defineAction,
@@ -150,7 +148,7 @@ describe('Configuration test Suit:', () => {
         actionNames
       } = getActionManFor('app/test');
 
-      beforeEach(function(){
+      beforeEach(function () {
         configure({
           OTHERWISE:'&&'
         });
@@ -158,7 +156,7 @@ describe('Configuration test Suit:', () => {
         defineAction('TEST_ACTION');
 
         reducer = actionHandler({
-          [actionNames.TEST_ACTION]: function(state, action){
+          [actionNames.TEST_ACTION]: function (state, action) {
             return 'TEST_ACTION_TRIGGERED_' + action.payload;
           }
         });
@@ -168,7 +166,7 @@ describe('Configuration test Suit:', () => {
         expect(reducer(null, actions.TEST_ACTION(10))).toBe('TEST_ACTION_TRIGGERED_10');
       });
 
-      it("should return original state when both `otherwise` handler and action handler is not present",()=>{
+      it('should return original state when both `otherwise` handler and action handler is not present',()=>{
         expect(reducer('ORIGINAL_STATE', {
           type:'TEST_&&_ACTION',
           payload: 10
